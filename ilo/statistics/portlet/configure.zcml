@@ -5,5 +5,13 @@
 
     <include package="plone.app.portlets" file="permissions.zcml"/>
     <!-- -*- extra stuff goes here -*- -->
+    <plone:portlet
+        name="ilo.statistics.portlet.TORStatistical"
+        interface=".torstatistical.ITORStatistical"
+        assignment=".torstatistical.Assignment"
+        renderer=".torstatistical.Renderer"
+        addview=".torstatistical.AddForm"
+        editview=".torstatistical.EditForm"
+        />
 
 </configure>

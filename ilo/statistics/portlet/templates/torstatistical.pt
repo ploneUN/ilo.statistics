@@ -1,0 +1,18 @@
+<dl class="portlet portletTORStatistical"
+    i18n:domain="ilo.statistics">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        TOR Statistical
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem">
+    </dd>
+
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>
