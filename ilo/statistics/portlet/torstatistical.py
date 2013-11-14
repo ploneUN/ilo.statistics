@@ -20,6 +20,9 @@ from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ilo.statistics import MessageFactory as _
 from plone import api
+from operator import itemgetter
+from heapq import nlargest
+
 
 class ITORStatistical(IPortletDataProvider):
     """
@@ -64,7 +67,25 @@ class Renderer(base.Renderer):
         for i in data:
             final_data.extend(getattr(i, key))
 
-        return list(set(final_data))
+        return self.mostcommon(final_data, 5)
+
+    def mostcommon(self, iterable, n=None):
+        """Return a sorted list of the most common to
+        least common elements andtheir counts.  If n is specified,
+        return only the n most common elements.
+
+        """
+        #http://code.activestate.com/recipes/347615/
+
+        bag = {}
+        bag_get = bag.get
+        for elem in iterable:
+            bag[elem] = bag_get(elem, 0) + 1
+        if n is None:
+            return sorted(bag.iteritems(), key=itemgetter(1), reverse=True)
+        it = enumerate(bag.iteritems())
+        nl = nlargest(n, ((cnt, i, elem) for (i, (elem, cnt)) in it))
+        return [(elem, cnt) for cnt, i, elem in nl]
 
 # XXX: z3cform
 # class AddForm(z3cformhelper.AddForm):

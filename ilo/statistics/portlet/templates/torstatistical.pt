@@ -3,28 +3,31 @@
 
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
-        TOR Statistical
+        TOR Statistics
         <span class="portletTopRight"></span>
     </dt>
 
     <dd class="portletItem">
     <div>
-    <h3>Total TOR's available</h3>
-    <span tal:content="view/total_tor"/>
+    <h3>Total TORs</h3>
+    <span class="tor-total-count" tal:content="view/total_tor"/>
     </div>
 
     <div>
     <h3>Areas of work</h3>
-    <ul tal:repeat="item python: view.get_data('ilo_themes')">
-        <li tal:content="item"></li>
-    </ul>
-    </div>
+    <table class="vertical listing tor-statistics-table">
+            <thead>
+                <tr>
+                <th> Themes </th>
+                <th> Total </th>
+            </tr>
+            </thead>
 
-    <div>
-    <h3>Geographical Assignments</h3>
-    <ul tal:repeat="item python: view.get_data('ilo_regions')">
-        <li tal:content="item"></li>
-    </ul>
+            <tr tal:repeat="item python: view.get_data('ilo_themes')">
+                <td tal:content="python: item[0]"></td>
+                <td  class="tor-statistics-total" tal:content="python: item[1]"></td>
+        </tr>
+    </table>
     </div>
     </dd>
 

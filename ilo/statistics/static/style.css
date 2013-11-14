@@ -1,0 +1,18 @@
+/* style.css */
+
+.tor-statistics-table {
+    width: 100%;
+}
+
+.portletTORStatistical h3 {
+
+    margin-top: 10px;
+}
+
+.tor-statistics-total {
+    text-align: center;
+}
+
+.tor-total-count {
+    font-size:20px;-
+}
