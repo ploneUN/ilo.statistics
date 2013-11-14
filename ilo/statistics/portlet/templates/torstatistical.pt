@@ -8,6 +8,24 @@
     </dt>
 
     <dd class="portletItem">
+    <div>
+    <h3>Total TOR's available</h3>
+    <span tal:content="view/total_tor"/>
+    </div>
+
+    <div>
+    <h3>Areas of work</h3>
+    <ul tal:repeat="item python: view.get_data('ilo_themes')">
+        <li tal:content="item"></li>
+    </ul>
+    </div>
+
+    <div>
+    <h3>Geographical Assignments</h3>
+    <ul tal:repeat="item python: view.get_data('ilo_regions')">
+        <li tal:content="item"></li>
+    </ul>
+    </div>
     </dd>
 
     <dd class="portletFooter">

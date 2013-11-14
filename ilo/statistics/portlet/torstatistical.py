@@ -19,6 +19,7 @@ from plone.app.portlets.cache import render_cachekey
 from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ilo.statistics import MessageFactory as _
+from plone import api
 
 class ITORStatistical(IPortletDataProvider):
     """
@@ -38,12 +39,32 @@ class Assignment(base.Assignment):
         return _('TOR Statistical')
 
 class Renderer(base.Renderer):
-    
+
+
     render = ViewPageTemplateFile('templates/torstatistical.pt')
 
     @property
     def available(self):
         return True
+
+    def total_tor(self):
+        catalog = api.portal.get_tool(name='portal_catalog')
+        return len(catalog(portal_type='ploneun.tor.torfacilityform'))
+
+    def get_data(self, key):
+        catalog = api.portal.get_tool(name='portal_catalog')
+        uniquevalue = catalog.uniqueValuesFor('%s' % key)
+        data = catalog.searchResults({
+            key: uniquevalue,
+            'portal_type': "ploneun.tor.torfacilityform"
+            })
+
+        final_data = list()
+
+        for i in data:
+            final_data.extend(getattr(i, key))
+
+        return list(set(final_data))
 
 # XXX: z3cform
 # class AddForm(z3cformhelper.AddForm):
