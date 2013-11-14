@@ -23,7 +23,7 @@
             </tr>
             </thead>
 
-            <tr tal:repeat="item python: view.get_data('ilo_themes')">
+            <tr tal:repeat="item python: view.get_mostcommon_for('ilo_themes')">
                 <td tal:content="python: item[0]"></td>
                 <td  class="tor-statistics-total" tal:content="python: item[1]"></td>
         </tr>

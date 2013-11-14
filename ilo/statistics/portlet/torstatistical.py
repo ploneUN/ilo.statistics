@@ -54,11 +54,11 @@ class Renderer(base.Renderer):
         catalog = api.portal.get_tool(name='portal_catalog')
         return len(catalog(portal_type='ploneun.tor.torfacilityform'))
 
-    def get_data(self, key):
+    def get_mostcommon_for(self, index, limit=5):
         catalog = api.portal.get_tool(name='portal_catalog')
-        uniquevalue = catalog.uniqueValuesFor('%s' % key)
+        uniquevalue = catalog.uniqueValuesFor(index)
         data = catalog.searchResults({
-            key: uniquevalue,
+            index: uniquevalue,
             'portal_type': "ploneun.tor.torfacilityform"
             })
 
@@ -67,7 +67,7 @@ class Renderer(base.Renderer):
         for i in data:
             final_data.extend(getattr(i, key))
 
-        return self.mostcommon(final_data, 5)
+        return self.mostcommon(final_data, limit)
 
     def mostcommon(self, iterable, n=None):
         """Return a sorted list of the most common to
